@@ -85,13 +85,21 @@
             transition: 0.4s;
             text-decoration: none;
             color: white;
+            position: relative;
         }
 
-        .card-canal:hover {
-            border-color: #00ff00;
-            transform: scale(1.05);
-            box-shadow: 0 15px 40px rgba(0, 255, 0, 0.15);
-        }
+        /* Estilos por Cargo */
+        .lider { border-color: #00ff00; }
+        .lider:hover { border-color: #00ff00; box-shadow: 0 0 30px rgba(0, 255, 0, 0.3); }
+        .lider .foto-perfil { border-color: #00ff00; box-shadow: 0 0 15px #00ff00; }
+
+        .vice-lider { border-color: #00d9ff; }
+        .vice-lider:hover { border-color: #00d9ff; box-shadow: 0 0 30px rgba(0, 217, 255, 0.3); }
+        .vice-lider .foto-perfil { border-color: #00d9ff; box-shadow: 0 0 15px #00d9ff; }
+
+        .pre-elite { border-color: #aaaaaa; }
+        .pre-elite:hover { border-color: #ffffff; box-shadow: 0 0 30px rgba(255, 255, 255, 0.1); }
+        .pre-elite .foto-perfil { border-color: #aaaaaa; }
 
         .foto-perfil {
             width: 100px;
@@ -99,7 +107,7 @@
             border-radius: 50%;
             background-color: #222;
             margin: 0 auto 20px;
-            border: 3px solid #00ff00;
+            border: 3px solid;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -119,6 +127,27 @@
             font-size: 0.8rem;
             color: #888;
             text-transform: uppercase;
+        }
+
+        /* --- ESTILOS DA TDR TV (ADICIONADO) --- */
+        .tv-section { margin-bottom: 50px; text-align: center; width: 100%; }
+        .tv-frame {
+            width: 90%; max-width: 800px; aspect-ratio: 16/9; margin: 20px auto;
+            background: #000; border: 6px solid #1a1a1a; border-radius: 15px;
+            position: relative; box-shadow: 0 0 40px rgba(0, 217, 255, 0.2);
+            overflow: hidden; cursor: pointer;
+        }
+        #player { width: 100%; height: 100%; pointer-events: none; }
+        .tv-logo {
+            position: absolute; top: 15px; right: 15px; background: rgba(0, 0, 0, 0.8);
+            padding: 4px 12px; border-radius: 4px; font-family: 'Arial Black', sans-serif;
+            font-size: 0.8rem; color: #fff; z-index: 20; border-left: 3px solid #00d9ff;
+        }
+        .som-aviso {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.6); display: flex; flex-direction: column;
+            justify-content: center; align-items: center; z-index: 30; color: #fff;
+            font-weight: bold; transition: 0.5s;
         }
 
         footer {
@@ -143,23 +172,23 @@
         
         <div class="grid-canais">
             
-            <a href="https://youtube.com/@sonezera?si=nM4YxEWcuBCUFwjA" target="_blank" class="card-canal">
+            <a href="https://youtube.com/@sonezera?si=nM4YxEWcuBCUFwjA" target="_blank" class="card-canal lider">
                 <div class="foto-perfil">
                     <img src="https://yt3.googleusercontent.com/3LWLPVYDEpUScQ7ZItgM3NZNFZYRH1zfltlOTngQpTy0XDLaZ3YJ3p-faE-fiX1SX53SB2k53g=s160-c-k-c0x00ffffff-no-rj" alt="Sonezera">
                 </div>
                 <span class="nome-canal">Sonezera</span>
-                <span class="status">Líder</span>
+                <span class="status" style="color: #00ff00;">Líder</span>
             </a>
 
-            <a href="https://youtube.com/@jamesurico?si=JRmVq9EHvxFA_rfA" target="_blank" class="card-canal">
+            <a href="https://youtube.com/@jamesurico?si=JRmVq9EHvxFA_rfA" target="_blank" class="card-canal vice-lider">
                 <div class="foto-perfil">
                     <img src="https://yt3.googleusercontent.com/qQj12zrq6Z9Qj3An-xbgoZ9St_xsHoIKM-sG_LWoUGIlyzAIEMEBWhPdMRstAhLLtcKvas5Ydw=s160-c-k-c0x00ffffff-no-rj" alt="James">
                 </div>
                 <span class="nome-canal">James</span>
-                <span class="status">Vice Lider</span>
+                <span class="status" style="color: #00d9ff;">Vice Lider</span>
             </a>
 
-            <a href="https://youtube.com/@apenasumfadosukuna?si=ilvWskuolITX3bj6" target="_blank" class="card-canal">
+            <a href="https://youtube.com/@apenasumfadosukuna?si=ilvWskuolITX3bj6" target="_blank" class="card-canal pre-elite">
                 <div class="foto-perfil">
                     <img src="https://yt3.googleusercontent.com/LnOsdj2z23jeZqHhwsSy_PXA0MEe-fkoHreuG8vsspNDwHBuglXEs3ZtjpUr-eJN1AUAM6WnZw=s160-c-k-c0x00ffffff-no-rj" alt="Pão Amanteigado">
                 </div>
@@ -170,9 +199,42 @@
         </div>
     </div>
 
+    <section class="tv-section">
+        <h2 style="color: #00d9ff; font-size: 1.5rem;">📺 TRANSMISSÃO: TDR TV</h2>
+        <div class="tv-frame" id="tv-container">
+            <div class="tv-logo">TDR <b>TV</b></div>
+            <div class="som-aviso" id="aviso-som">
+                <span style="font-size: 1.5rem;">🔇 CLIQUE PARA ATIVAR O SOM</span>
+            </div>
+            <div id="player"></div>
+        </div>
+    </section>
+
     <footer>
         © 2026 Tropa Dash Remix • Criado por Didio
     </footer>
 
+    <script src="https://www.youtube.com/iframe_api"></script>
+    <script>
+        let player;
+        function onYouTubeIframeAPIReady() {
+            player = new YT.Player('player', {
+                height: '100%', width: '100%',
+                playerVars: {
+                    'listType': 'playlist',
+                    'list': 'PLQ_I_DjoRP8OMIm213FDXRa2e9FO2zrBv',
+                    'autoplay': 1, 'mute': 1, 'controls': 0, 'loop': 1, 'modestbranding': 1
+                },
+                events: { 'onReady': (e) => e.target.playVideo() }
+            });
+        }
+        document.getElementById('tv-container').addEventListener('click', function() {
+            if(player) {
+                player.unMute();
+                document.getElementById('aviso-som').style.opacity = '0';
+                setTimeout(() => { document.getElementById('aviso-som').style.display = 'none'; }, 500);
+            }
+        });
+    </script>
 </body>
 </html>
